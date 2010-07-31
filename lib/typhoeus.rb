@@ -2,9 +2,17 @@ $LOAD_PATH.unshift(File.dirname(__FILE__)) unless $LOAD_PATH.include?(File.dirna
 
 require 'rack/utils'
 require 'digest/sha2'
+
 require 'typhoeus/easy'
 require 'typhoeus/multi'
-require 'typhoeus/native'
+
+begin
+  RUBY_VERSION =~ /(\d+.\d+)/
+  require "typhoeus/#{$1}/native"
+rescue LoadError
+  require 'typhoeus/native'
+end
+
 require 'typhoeus/filter'
 require 'typhoeus/remote_method'
 require 'typhoeus/remote'
