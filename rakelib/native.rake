@@ -12,18 +12,23 @@ Rake::ExtensionTask.new('native', Rake.application.jeweler.gemspec) do |ext|
 
   # reference where the vendored libCurl got extracted
   curl_lib = File.expand_path(File.join(File.dirname(__FILE__), '..', 'vendor', "curl-#{CURL_VERSION}-devel-mingw32"))
-  ext.cross_config_options << "--with-curl-include=#{curl_lib}/include"
-  # When compiling for windows, the libcurl.dll lies in the /bin folder
-  ext.cross_config_options << "--with-curl-lib=#{curl_lib}/bin"
 
   # automatically add build options to avoid need of manual input
   if RUBY_PLATFORM =~ /mswin|mingw/ then
     # define target for extension (supporting fat binaries)
     ruby_ver = RUBY_VERSION.match(/(\d+\.\d+)/)[1]
     ext.lib_dir = "lib/typhoeus/#{ruby_ver}"
+
+    ext.config_options << "--with-curl-include=#{curl_lib}/include"
+    # When compiling for windows, the libcurl.dll lies in the /bin folder
+    ext.config_options << "--with-curl-lib=#{curl_lib}/bin"
   else
     ext.cross_compile = true
     ext.cross_platform = ['i386-mswin32-60', 'i386-mingw32']
+
+    ext.cross_config_options << "--with-curl-include=#{curl_lib}/include"
+    # When compiling for windows, the libcurl.dll lies in the /bin folder
+    ext.cross_config_options << "--with-curl-lib=#{curl_lib}/bin"
 
     ext.cross_compiling do |gemspec|
       gemspec.post_install_message = <<-POST_INSTALL_MESSAGE
