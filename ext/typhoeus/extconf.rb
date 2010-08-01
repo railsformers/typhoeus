@@ -6,8 +6,6 @@ require 'mkmf'
 
 RbConfig::MAKEFILE_CONFIG['CC'] = ENV['CC'] if ENV['CC']
 
-inc, lib = dir_config('curl', ['/usr/local', '/opt/local', '/usr'])
-
 if RUBY_PLATFORM =~ /mswin/
   $CFLAGS << ' -W3'
 else
@@ -24,7 +22,10 @@ def asplode missing
   end
 end
 
+
+dir_config('curl')
+libname = RUBY_PLATFORM =~ /mswin|mingw/ ? 'libcurl' : 'curl'
+asplode('libcurl') unless find_library(libname, 'curl_easy_init')
 asplode('curl/curl.h') unless find_header('curl/curl.h')
-asplode('curl') unless find_library 'libcurl', 'curl_easy_init'
 
 create_makefile("typhoeus/native")
