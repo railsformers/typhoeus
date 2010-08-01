@@ -22,7 +22,7 @@ require 'typhoeus/request'
 require 'typhoeus/hydra'
 
 module Typhoeus
-  VERSION = File.read(File.dirname(__FILE__) + "/../VERSION").chomp
+  VERSION = "0.1.31"
 
   def self.easy_object_pool
     @easy_objects ||= []

@@ -5,7 +5,7 @@ CURL_VERSION = "7.21.0"
 
 # C:/Ruby187/bin/ruby.exe -I. ../../../../ext/typhoeus/extconf.rb --with-curl-include=c:/Code/typhoeus/vendor/curl-7.21.0-devel-mingw32/include --with-curl-lib=c:/Code/typhoeus/vendor/curl-7.21.0-devel-mingw32/bin
 
-Rake::ExtensionTask.new('native', Rake.application.jeweler.gemspec) do |ext|
+Rake::ExtensionTask.new('native', HOE.spec) do |ext|
   # where native extension will be copied (matches makefile)
   ext.lib_dir = "lib/typhoeus"
   ext.ext_dir = "ext/typhoeus"
