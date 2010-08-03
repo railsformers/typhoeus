@@ -25,7 +25,7 @@ static VALUE multi_add_handle(VALUE self, VALUE easy) {
   if (mcode == CURLM_CALL_MULTI_PERFORM) {
     curl_multi_perform(curl_multi->multi, &(curl_multi->running));
   }
-  // 
+  //
   // if (curl_multi->running) {
   //     printf("call read_info on add<br/>");
   //   multi_read_info(self, curl_multi->multi);
@@ -128,6 +128,7 @@ static VALUE fire_and_forget(VALUE self) {
   CurlMulti *curl_multi;
   Data_Get_Struct(self, CurlMulti, curl_multi);
   rb_curl_multi_run( self, curl_multi->multi, &(curl_multi->running) );
+  return Qnil;
 }
 
 static VALUE multi_perform(VALUE self) {
