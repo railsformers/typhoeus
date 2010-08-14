@@ -76,7 +76,7 @@ describe Typhoeus::Easy do
       e.response_code.should == 302
     end
   end
-  
+
   describe "authentication" do
     it "should allow to set username and password" do
       e = Typhoeus::Easy.new
@@ -87,7 +87,7 @@ describe Typhoeus::Easy do
       e.perform
       e.response_code.should == 200
     end
-    
+
     it "should allow to query auth methods support by the server" do
       e = Typhoeus::Easy.new
       e.url = "http://localhost:3001/auth_basic/foo/bar"
@@ -105,7 +105,7 @@ describe Typhoeus::Easy do
       e.response_code.should == 200
     end
   end
-  
+
   describe "get" do
     it "should perform a get" do
       easy = Typhoeus::Easy.new
@@ -120,7 +120,7 @@ describe Typhoeus::Easy do
   describe "purge" do
     it "should set custom request to purge" do
       easy = Typhoeus::Easy.new
-      easy.should_receive(:set_option).with(Typhoeus::Easy::OPTION_VALUES[:CURLOPT_CUSTOMREQUEST], "PURGE").once
+      easy.should_receive(:set_option).with(:CUSTOMREQUEST, "PURGE").once
       easy.method = :purge
     end
   end
@@ -155,7 +155,7 @@ describe Typhoeus::Easy do
         :foo => 'bar',
         :username => ['dbalatero', 'dbalatero2']
       }
-      
+
       easy.url.should =~ /\?.*username=dbalatero&username=dbalatero2/
     end
   end
@@ -170,7 +170,7 @@ describe Typhoeus::Easy do
       easy.response_code.should == 200
       JSON.parse(easy.response_body)["REQUEST_METHOD"].should == "PUT"
     end
-    
+
     it "should send a request body" do
       easy = Typhoeus::Easy.new
       easy.url    = "http://localhost:3002"
@@ -181,7 +181,7 @@ describe Typhoeus::Easy do
       easy.response_body.should include("this is a body!")
     end
   end
-  
+
   describe "post" do
     it "should perform a post" do
       easy = Typhoeus::Easy.new
@@ -191,7 +191,7 @@ describe Typhoeus::Easy do
       easy.response_code.should == 200
       JSON.parse(easy.response_body)["REQUEST_METHOD"].should == "POST"
     end
-    
+
     it "should send a request body" do
       easy = Typhoeus::Easy.new
       easy.url    = "http://localhost:3002"
@@ -201,7 +201,7 @@ describe Typhoeus::Easy do
       easy.response_code.should == 200
       easy.response_body.should include("this is a body!")
     end
-    
+
     it "should handle params" do
       easy = Typhoeus::Easy.new
       easy.url    = "http://localhost:3002"
@@ -212,7 +212,7 @@ describe Typhoeus::Easy do
       easy.response_body.should include("foo=bar")
     end
   end
-  
+
   describe "delete" do
     it "should perform a delete" do
       easy = Typhoeus::Easy.new
@@ -222,7 +222,7 @@ describe Typhoeus::Easy do
       easy.response_code.should == 200
       JSON.parse(easy.response_body)["REQUEST_METHOD"].should == "DELETE"
     end
-    
+
     it "should send a request body" do
       easy = Typhoeus::Easy.new
       easy.url    = "http://localhost:3002"
@@ -233,9 +233,9 @@ describe Typhoeus::Easy do
       easy.response_body.should include("this is a body!")
     end
   end
-  
+
   describe "encoding/compression support" do
-    
+
     it "should send valid encoding headers and decode the response" do
       easy = Typhoeus::Easy.new
       easy.url = "http://localhost:3002/gzipped"
@@ -244,6 +244,6 @@ describe Typhoeus::Easy do
       easy.response_code.should == 200
       JSON.parse(easy.response_body)["HTTP_ACCEPT_ENCODING"].should == "deflate, gzip"
     end
-    
+
   end
 end

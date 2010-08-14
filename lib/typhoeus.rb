@@ -1,5 +1,6 @@
 $LOAD_PATH.unshift(File.dirname(__FILE__)) unless $LOAD_PATH.include?(File.dirname(__FILE__))
 
+require "curl"
 require 'rack/utils'
 require 'digest/sha2'
 require 'typhoeus/easy'
