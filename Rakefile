@@ -12,6 +12,7 @@ begin
     gemspec.homepage = "http://github.com/pauldix/typhoeus"
     gemspec.authors = ["Paul Dix"]
     gemspec.add_dependency "rack"
+    gemspec.add_dependency "curl-ffi"
     gemspec.add_development_dependency "rspec"
     gemspec.add_development_dependency "jeweler"
     gemspec.add_development_dependency "diff-lcs"
