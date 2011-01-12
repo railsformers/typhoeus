@@ -18,10 +18,9 @@ Gem::Specification.new do |s|
   ]
   s.files = [
     ".gitignore",
-     "CHANGELOG.markdown",
-     "README.textile",
+     "Changelog.rdoc",
+     "README.rdoc",
      "Rakefile",
-     "VERSION",
      "benchmarks/profile.rb",
      "benchmarks/vs_nethttp.rb",
      "examples/twitter.rb",
