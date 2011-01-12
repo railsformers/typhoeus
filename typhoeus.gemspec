@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.email = %q{paul@pauldix.net}
   s.extensions = ["ext/typhoeus/extconf.rb"]
   s.extra_rdoc_files = [
-    "README.textile"
+    "README.rdoc"
   ]
   s.files = [
     ".gitignore",
